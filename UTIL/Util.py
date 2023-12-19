@@ -3,13 +3,13 @@ import mysql.connector as sql
 class DBPropertyUtil:
     @staticmethod
     def get_connection_string():
-        # host=input("Enter host name: ")
-        # user=input("Enter user name: ")
-        # password=input("Enter password: ")
-        # database=input("Enter database name: ")
+        host=input("Enter host name: ")
+        user=input("Enter user name: ")
+        password=input("Enter password: ")
+        database=input("Enter database name: ")
         try:
-            # mydb = sql.connect(host=host,user=user,password=password,database=database)
-            mydb = sql.connect(host='localhost',user='root',password='Vaishali@1234',database='CarConnect')
+            mydb = sql.connect(host=host,user=user,password=password,database=database)
+            # mydb = sql.connect(host='localhost',user='root',password='Vaishali@1234',database='CarConnect')
         except:
             print("Unable to connect to the database.")
         else:
