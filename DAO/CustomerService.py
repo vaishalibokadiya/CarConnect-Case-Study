@@ -103,8 +103,10 @@ class CustomerService (ICustomerService):
                 mycursor.execute(f"UPDATE Customer SET firstName='{firstName}',lastName='{lastName}',email='{email}',phoneNumber='{phoneNumber}',address='{address}',username='{username}',password='{password}',registrationDate='{registrationDate}' WHERE customerId={customerId};")
             except:
                 print("Failed to update customer from the database.")
+                return False
             else:
                 print("Customer updated successfully.")
+                return True
 
     def DeleteCustomer():
         try:

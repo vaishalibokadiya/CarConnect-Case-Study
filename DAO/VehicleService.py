@@ -76,8 +76,10 @@ class VehicleService (IVehicleService):
                 mycursor.execute(f"INSERT INTO Vehicle (model, make, year, color, registrationNumber, availability, dailyRate) VALUES ('{model}','{make}','{year}','{color}','{registrationNumber}','{availability}','{dailyRate}');")
             except:
                 print("Failed to insert data from the database.")
+                return False
             else:
                 print("Data inserted successfully.")
+                return True
 
     def UpdateVehicle():
         try:

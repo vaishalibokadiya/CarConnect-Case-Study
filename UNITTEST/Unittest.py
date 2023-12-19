@@ -1,14 +1,22 @@
 import unittest
 
 import sys
-sys.path.insert(0,'D:/Vaishali Bokadiya/Python/CarConnect/DAO')
+sys.path.insert(0,'D:/Vaishali Bokadiya/Python/TechShop/DAO')
+
+from CustomerService import CustomerService
+from VehicleService import VehicleService
+
 
 class myTestCase(unittest.TestCase):
-    def testCustomerAuth():
-        pass
+    def testCustomerUpdate(self):
+        isUpdated=CustomerService.UpdateCustomer()
+        
+        self.assertTrue(isUpdated)
 
-    def testCustomerUpdate():
-        pass
+    def testAddVehicle(self):
+        isAdded=VehicleService.AddVehicle()
 
-    def testAddVehicle():
-        pass
+        self.assertTrue(isAdded)
+
+if __name__ =="__main__":
+    unittest.main()
