@@ -99,8 +99,10 @@ class VehicleService (IVehicleService):
                 mycursor.execute(f"UPDATE Vehicle SET model='{model}', make='{make}', year='{year}', color='{color}', registrationNumber='{registrationNumber}', availability='{availability}', dailyRate='{dailyRate}' WHERE vehicleId={vehicleId};")
             except:
                 print("Failed to update vehicle from the database.")
+                return False
             else:
                 print("Vehicle updated successfully.")
+                return True
 
     def RemoveVehicle():
         try:

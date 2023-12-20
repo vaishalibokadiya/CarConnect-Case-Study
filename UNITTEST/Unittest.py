@@ -18,5 +18,21 @@ class myTestCase(unittest.TestCase):
 
         self.assertTrue(isAdded)
 
+    def testUpdateVehicle(self):
+        isUpdated=VehicleService.UpdateVehicle()
+
+        self.assertTrue(isUpdated)
+
+    def testListAllAvailableVehicle(self):
+        isListed=VehicleService.testListAllAvailableVehicle()
+
+        self.assertTrue(isListed)
+
+    def testListAllVehicle(self):
+        isListed=VehicleService.testListAllVehicle()
+
+        self.assertTrue(isListed)
+    
+
 if __name__ =="__main__":
     unittest.main()
