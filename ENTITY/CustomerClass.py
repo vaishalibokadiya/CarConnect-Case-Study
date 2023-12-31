@@ -1,6 +1,6 @@
 import sys
 sys.path.insert(0,'D:/Vaishali Bokadiya/Python/CarConnect/EXCEPTION')
-from EXCEPTION import AuthenticationException
+from AuthenticationException import AuthenticationException
 
 class Customer:
     def __init__(self, customerId, firstName, lastName, email, phoneNumber, address, userName, password, registrationDate):

@@ -1,7 +1,7 @@
 import mysql.connector as sql
 import sys
 sys.path.insert(0,'D:/Vaishali Bokadiya/Python/CarConnect/EXCEPTION')
-from EXCEPTION import DatabaseConnectionException
+from DatabaseException import DatabaseConnectionException
 
 class DBPropertyUtil:
     @staticmethod
