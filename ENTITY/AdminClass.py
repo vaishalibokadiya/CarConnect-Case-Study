@@ -1,3 +1,6 @@
+import sys
+sys.path.insert(0,'D:/Vaishali Bokadiya/Python/CarConnect/EXCEPTION')
+from EXCEPTION import AuthenticationException
 class Admin:
     def __init__(self, adminId, firstName, lastName, email, phoneNumber, userName, password, role, joinDate):
         self.adminId = adminId
@@ -14,5 +17,4 @@ class Admin:
         if password==self.password:
             return True
         else:
-            return False
-
+            raise AuthenticationException

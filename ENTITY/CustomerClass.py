@@ -1,3 +1,7 @@
+import sys
+sys.path.insert(0,'D:/Vaishali Bokadiya/Python/CarConnect/EXCEPTION')
+from EXCEPTION import AuthenticationException
+
 class Customer:
     def __init__(self, customerId, firstName, lastName, email, phoneNumber, address, userName, password, registrationDate):
         self.customerId = customerId
@@ -14,4 +18,4 @@ class Customer:
         if password==self.password:
             return True
         else:
-            return False
+            raise AuthenticationException

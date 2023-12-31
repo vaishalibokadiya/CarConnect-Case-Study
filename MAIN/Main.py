@@ -9,6 +9,11 @@ from AdminService import AdminService
 
 from Util import DBConnUtil,DBPropertyUtil
 
+try:
+    [mycursor,mydb]=DBConnUtil.get_connection_object(DBPropertyUtil.get_connection_string())
+except:
+    print("Error in connection")
+
 def show_menu():
     print("1: Customer Services")
     print("2: Reservation Services")
@@ -25,15 +30,15 @@ def show_menu():
 
         choice2=int(input("Enter your choice: "))
         if choice2==1:
-            CustomerService.GetCustomerById()
+            CustomerService.GetCustomerById(mycursor)
         elif choice2==2:
-            CustomerService.GetAdminByUsername()
+            CustomerService.GetAdminByUsername(mycursor)
         elif choice2==3:
-            CustomerService.RegisterCustomer()
+            CustomerService.RegisterCustomer(mycursor)
         elif choice2==4:
-            CustomerService.UpdateCustomer()
+            CustomerService.UpdateCustomer(mycursor)
         elif choice2==5:
-            CustomerService.DeleteCustomer()
+            CustomerService.DeleteCustomer(mycursor)
         else:
             return 
 
@@ -46,15 +51,15 @@ def show_menu():
 
         choice2=int(input("Enter your choice: "))
         if choice2==1:
-            VehicleService.GetVehicleById()
+            VehicleService.GetVehicleById(mycursor)
         elif choice2==2:
-            VehicleService.GetAvailableVehicles()
+            VehicleService.GetAvailableVehicles(mycursor)
         elif choice2==3:
-            VehicleService.AddVehicle()
+            VehicleService.AddVehicle(mycursor)
         elif choice2==4:
-            VehicleService.UpdateVehicle()
+            VehicleService.UpdateVehicle(mycursor)
         elif choice2==5:
-            VehicleService.RemoveVehicle()
+            VehicleService.RemoveVehicle(mycursor)
         else:
             return 
 
@@ -67,15 +72,15 @@ def show_menu():
 
         choice2=int(input("Enter your choice: "))
         if choice2==1:
-            ReservationService.GetReservationById()
+            ReservationService.GetReservationById(mycursor)
         elif choice2==2:
-            ReservationService.GetReservationsByCustomerId()
+            ReservationService.GetReservationsByCustomerId(mycursor)
         elif choice2==3:
-            ReservationService.CreateReservation()
+            ReservationService.CreateReservation(mycursor)
         elif choice2==4:
-            ReservationService.UpdateReservation()
+            ReservationService.UpdateReservation(mycursor)
         elif choice2==5:
-            ReservationService.CancelReservation()
+            ReservationService.CancelReservation(mycursor)
         else:
             return 
         
@@ -89,15 +94,15 @@ def show_menu():
 
         choice2=int(input("Enter your choice: "))
         if choice2==1:
-            AdminService.GetAdminById()
+            AdminService.GetAdminById(mycursor)
         elif choice2==2:
-            AdminService.GetAdminByUsername()
+            AdminService.GetAdminByUsername(mycursor)
         elif choice2==3:
-            AdminService.RegisterAdmin()
+            AdminService.RegisterAdmin(mycursor)
         elif choice2==4:
-            AdminService.UpdateAdminInfo()
+            AdminService.UpdateAdminInfo(mycursor)
         elif choice2==5:
-            AdminService.DeleteAdmin()
+            AdminService.DeleteAdmin(mycursor)
         else:
             return 
 

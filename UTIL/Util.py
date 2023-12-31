@@ -1,4 +1,7 @@
 import mysql.connector as sql
+import sys
+sys.path.insert(0,'D:/Vaishali Bokadiya/Python/CarConnect/EXCEPTION')
+from EXCEPTION import DatabaseConnectionException
 
 class DBPropertyUtil:
     @staticmethod
@@ -10,8 +13,8 @@ class DBPropertyUtil:
         try:
             mydb = sql.connect(host=host,user=user,password=password,database=database)
             # mydb = sql.connect(host='localhost',user='root',password='Vaishali@1234',database='CarConnect')
-        except:
-            print("Unable to connect to the database.")
+        except DatabaseConnectionException as e:
+            print(e.message)
         else:
             print('Successfully connected to the database.')
             return mydb
