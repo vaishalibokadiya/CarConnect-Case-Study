@@ -3,6 +3,14 @@ sys.path.insert(0,'D:/Vaishali Bokadiya/Python/CarConnect/EXCEPTION')
 from AdminException import AdminNotFoundException
 
 from abc import ABC, abstractmethod
+from datetime import date
+import bcrypt
+
+def hash_password(password):
+    # Generate a salt and hash the password
+    salt = bcrypt.gensalt()
+    hashed_password = str(bcrypt.hashpw(password.encode('utf-8'), salt))[2:-1]
+    return hashed_password
 
 # Abstract Admin Class
 class IAdminService(ABC):
@@ -61,9 +69,9 @@ class AdminService (IAdminService):
         email=input("Enter email: ")
         phoneNumber=input("Enter phone number: ")
         username=input("Enter username: ")
-        password=input("Enter password: ")
+        password=str(hash_password(input("Enter password: ")))
         role=input("Enter role: ")
-        joinDate=input("Enter join date: ")
+        joinDate=date.today()
         try:
             mycursor.execute(f"INSERT INTO Admin (firstName, lastName, email, phoneNumber, username, password, role, joinDate) VALUES ('{firstName}','{lastName}','{email}','{phoneNumber}','{username}','{password}','{role}','{joinDate}');")
             mydb.commit()
@@ -80,7 +88,7 @@ class AdminService (IAdminService):
         email=input("Enter email: ")
         phoneNumber=input("Enter phone number: ")
         username=input("Enter username: ")
-        password=input("Enter password: ")
+        password=str(hash_password(input("Enter password: ")))
         role=input("Enter role: ")
         joinDate=input("Enter join date: ")
         try:

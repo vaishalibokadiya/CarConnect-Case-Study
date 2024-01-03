@@ -50,7 +50,7 @@ class ReservationService (IReservationService):
 
     # Get reservation details using customer Id
     def GetReservationsByCustomerId(mycursor,mydb):
-        customerId = int(input("Enter customer ID:: "))
+        customerId = int(input("Enter customer ID: "))
         try:
             mycursor.execute(f"SELECT * FROM Reservation WHERE customerId={customerId};")
         except:
@@ -68,8 +68,8 @@ class ReservationService (IReservationService):
         startDate=input("Enter start date: ")
         endDate=input("Enter end date: ")
         status=input("Enter status: ")
-        start=datetime.strptime(startDate, "%Y/%m/%d")
-        end=datetime.strptime(endDate, "%Y/%m/%d")
+        start=datetime.strptime(startDate, "%Y-%m-%d")
+        end=datetime.strptime(endDate, "%Y-%m-%d")
         mycursor.execute(f"SELECT dailyRate FROM Vehicle WHERE vehicleId={vehicleID}")
         value=mycursor.fetchone()
         dailyRate=convert_mysql_decimal_to_float(value[0])
@@ -90,7 +90,13 @@ class ReservationService (IReservationService):
         vehicleID=int(input("Enter vehicle id: "))
         startDate=input("Enter start date: ")
         endDate=input("Enter end date: ")
-        totalCost=int(input("Enter total cost: "))
+        start=datetime.strptime(startDate, "%Y-%m-%d")
+        end=datetime.strptime(endDate, "%Y-%m-%d")
+        mycursor.execute(f"SELECT dailyRate FROM Vehicle WHERE vehicleId={vehicleID}")
+        value=mycursor.fetchone()
+        dailyRate=convert_mysql_decimal_to_float(value[0])
+        noOfDays=(end-start).days
+        totalCost=int(noOfDays)*dailyRate
         status=input("Enter status: ")
         try:
             mycursor.execute(f"UPDATE Reservation SET customerId={customerID}, vehicleId={vehicleID}, startDate='{startDate}', endDate='{endDate}', totalCost={totalCost}, status='{status}' WHERE reservationId={reservationId};")

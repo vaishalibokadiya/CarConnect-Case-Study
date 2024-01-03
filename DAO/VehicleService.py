@@ -64,10 +64,10 @@ class VehicleService (IVehicleService):
         year=input("Enter year: ")
         color=input("Enter color: ")
         registrationNumber=input("Enter registration number: ")
-        availability=input("Enter availability: ")
-        dailyRate=input("Enter daily rate: ")
+        availability=bool(input("Enter availability: "))
+        dailyRate=float(input("Enter daily rate: "))
         try:
-            mycursor.execute(f"INSERT INTO Vehicle (model, make, year, color, registrationNumber, availability, dailyRate) VALUES ('{model}','{make}','{year}','{color}','{registrationNumber}','{availability}','{dailyRate}');")
+            mycursor.execute(f"INSERT INTO Vehicle (model, make, year, color, registrationNumber, availability, dailyRate) VALUES ('{model}','{make}','{year}','{color}','{registrationNumber}',{availability},'{dailyRate}');")
             mydb.commit()
         except:
             print("Failed to insert data from the database.")
@@ -84,10 +84,10 @@ class VehicleService (IVehicleService):
         year=input("Enter year: ")
         color=input("Enter color: ")
         registrationNumber=input("Enter registration number: ")
-        availability=input("Enter availability: ")
+        availability=bool(input("Enter availability: "))
         dailyRate=float(input("Enter daily rate: "))
         try:
-            mycursor.execute(f"UPDATE Vehicle SET model='{model}', make='{make}', year='{year}', color='{color}', registrationNumber='{registrationNumber}', availability='{availability}', dailyRate='{dailyRate}' WHERE vehicleId={vehicleId};")
+            mycursor.execute(f"UPDATE Vehicle SET model='{model}', make='{make}', year='{year}', color='{color}', registrationNumber='{registrationNumber}', availability={availability}, dailyRate='{dailyRate}' WHERE vehicleId={vehicleId};")
             mydb.commit()
         except:
             print("Failed to update vehicle from the database.")

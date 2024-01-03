@@ -1,5 +1,14 @@
 from abc import ABC, abstractmethod
 
+import bcrypt
+from datetime import date
+
+def hash_password(password):
+    # Generate a salt and hash the password
+    salt = bcrypt.gensalt()
+    hashed_password = str(bcrypt.hashpw(password.encode('utf-8'), salt))[2:-1]
+    return hashed_password
+
 # Abstract class for custromer service
 class ICustomerService(ABC):
     @abstractmethod
@@ -58,8 +67,8 @@ class CustomerService (ICustomerService):
         phoneNumber = input("Enter phone number: ")
         address = input("Enter address: ")
         username = input("Enter username: ")
-        password = input("Enter password: ")
-        registrationDate= input("Enter registration date: ")
+        password=str(hash_password(input("Enter password: ")))
+        registrationDate= date.today()
         try:
             mycursor.execute(f"INSERT INTO Customer (firstName, lastName, email, phoneNumber, address, username, password, registrationDate) VALUES ('{firstName}','{lastName}','{email}','{phoneNumber}','{address}','{username}','{password}','{registrationDate}');")
             mydb.commit()
@@ -77,7 +86,7 @@ class CustomerService (ICustomerService):
         phoneNumber = input("Enter phone number: ")
         address = input("Enter address: ")
         username = input("Enter username: ")
-        password = input("Enter password: ")
+        password=str(hash_password(input("Enter password: ")))
         registrationDate= input("Enter registration date: ")
         try: 
             mycursor.execute(f"UPDATE Customer SET firstName='{firstName}',lastName='{lastName}',email='{email}',phoneNumber='{phoneNumber}',address='{address}',username='{username}',password='{password}',registrationDate='{registrationDate}' WHERE customerId={customerId};")

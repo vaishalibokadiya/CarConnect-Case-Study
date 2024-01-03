@@ -12,7 +12,7 @@ class DBPropertyUtil:
         except DatabaseConnectionException as e:
             print(e.message)
         else:
-            print('Successfully connected to the database.')
+            # print('Successfully connected to the database.')
             return mydb
     
 # Class for getting cursor
@@ -26,5 +26,5 @@ class DBConnUtil:
         except:
             print("Error in getting cursor object")
         else:
-            print("Cursor created successfully")
+            # print("Cursor created successfully")
             return mycursor, mydb
