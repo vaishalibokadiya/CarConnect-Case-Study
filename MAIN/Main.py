@@ -9,6 +9,7 @@ from AdminService import AdminService
 
 from Util import DBConnUtil,DBPropertyUtil
 
+# Main Menu function
 def show_menu():
     try:
         [mycursor,mydb]=DBConnUtil.get_connection_object(DBPropertyUtil.get_connection_string())

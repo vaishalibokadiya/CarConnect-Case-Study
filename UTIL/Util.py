@@ -3,24 +3,22 @@ import sys
 sys.path.insert(0,'D:/Vaishali Bokadiya/Python/CarConnect/EXCEPTION')
 from DatabaseException import DatabaseConnectionException
 
+# Class for connecting to the database
 class DBPropertyUtil:
     @staticmethod
     def get_connection_string():
-        host=input("Enter host name: ")
-        user=input("Enter user name: ")
-        password=input("Enter password: ")
-        database=input("Enter database name: ")
         try:
-            mydb = sql.connect(host=host,user=user,password=password,database=database)
-            # mydb = sql.connect(host='localhost',user='root',password='Vaishali@1234',database='CarConnect')
+            mydb = sql.connect(host='localhost',user='root',password='Vaishali@1234',database='CarConnect')
         except DatabaseConnectionException as e:
             print(e.message)
         else:
             print('Successfully connected to the database.')
             return mydb
     
+# Class for getting cursor
 class DBConnUtil:
     @staticmethod
+    # takes mydb and returns the cursor and mydb
     def get_connection_object(mydb):
         try:
             mycursor = mydb.cursor()

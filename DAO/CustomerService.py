@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+# Abstract class for custromer service
 class ICustomerService(ABC):
     @abstractmethod
     def GetCustomerById(mymycursor,mydb):
@@ -21,7 +22,9 @@ class ICustomerService(ABC):
     def DeleteCustomer(mycursor,mydb):
         pass
 
+# Implementation of Customer Service
 class CustomerService (ICustomerService):
+    # Get customer details using customer id
     def GetCustomerById(mycursor,mydb):
         customerId = int(input("Enter customer Id: "))
         try:
@@ -34,7 +37,7 @@ class CustomerService (ICustomerService):
                 print(res)
             print("Data fetched successfully.")
 
-
+    # Get customer details using customer username
     def GetCustomerByUsername(mycursor,mydb):
         userName = input("Enter customer's username: ")
         try:
@@ -47,7 +50,7 @@ class CustomerService (ICustomerService):
                 print(res)
             print("Data fetched successfully.")
 
-
+    # Create a new customer
     def RegisterCustomer(mycursor,mydb):
         firstName = input("Enter first name: ")
         lastName = input("Enter last name: ")
@@ -65,6 +68,7 @@ class CustomerService (ICustomerService):
         else:
             print("Data inserted successfully.")
 
+    # Update an existing customer using customer id
     def UpdateCustomer(mycursor,mydb):
         customerId = int(input("Enter ID of the customer you want to update: "))
         firstName = input("Enter first name: ")
@@ -85,6 +89,7 @@ class CustomerService (ICustomerService):
             print("Customer updated successfully.")
             return True
 
+    # Delete a customer
     def DeleteCustomer(mycursor,mydb):
         customerId = int(input("Enter customer Id: "))
         try:

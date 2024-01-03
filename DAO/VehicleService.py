@@ -4,6 +4,7 @@ from VehicleException import VehicleNotFoundException
 
 from abc import ABC, abstractmethod
 
+# Abstract class for Vehicle Service
 class IVehicleService(ABC):
     @abstractmethod
     def GetVehicleById(mycursor,mydb):
@@ -25,7 +26,9 @@ class IVehicleService(ABC):
     def RemoveVehicle(mycursor,mydb):
         pass
 
+# Implementation of IVehicleService
 class VehicleService (IVehicleService):
+    # Get Vehicle details using vehicle id
     def GetVehicleById(mycursor,mydb):
         vehicleId = int(input("Enter vehicle Id: "))
         try:
@@ -40,6 +43,7 @@ class VehicleService (IVehicleService):
             print("Data fetched successfully.")
             return True
 
+    # Get list of all available vehicles
     def GetAvailableVehicles(mycursor,mydb):
         try:
             mycursor.execute(f"SELECT * FROM Vehicle WHERE availability = true;")
@@ -53,6 +57,7 @@ class VehicleService (IVehicleService):
             print("Data fetched successfully.")
             return True
 
+    # Add new vehicle
     def AddVehicle(mycursor,mydb):
         model=input("Enter model name: ")
         make=input("Enter make: ")
@@ -71,6 +76,7 @@ class VehicleService (IVehicleService):
             print("Data inserted successfully.")
             return True
 
+    # Update an existing vehicle using vehicle id
     def UpdateVehicle(mycursor,mydb):
         vehicleId = int(input("Enter ID of the vehicle you want to update: "))
         model=input("Enter model name: ")
@@ -90,6 +96,7 @@ class VehicleService (IVehicleService):
             print("Vehicle updated successfully.")
             return True
 
+    # Delete a vehicle
     def RemoveVehicle(mycursor,mydb):
         vehicleId = int(input("Enter ID of the vehicle you want to remove: "))
         try:

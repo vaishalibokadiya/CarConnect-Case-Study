@@ -4,6 +4,7 @@ from AdminException import AdminNotFoundException
 
 from abc import ABC, abstractmethod
 
+# Abstract Admin Class
 class IAdminService(ABC):
     @abstractmethod
     def GetAdminById(mycursor,mydb):
@@ -25,7 +26,9 @@ class IAdminService(ABC):
     def DeleteAdmin(mycursor,mydb):
         pass
 
+# Implementation of IAdminService
 class AdminService (IAdminService):
+    # Get admin using Id
     def GetAdminById(mycursor,mydb):
         adminId = int(input("Enter admin ID: "))
         try:
@@ -38,6 +41,7 @@ class AdminService (IAdminService):
                 print(row)
             print("Admin details fetched successfully.")
 
+    # Get admin using the username
     def GetAdminByUsername(mycursor,mydb):
         username = input("Enter admin username: ")
         try:
@@ -50,6 +54,7 @@ class AdminService (IAdminService):
                 print(row)
             print("Admin details fetched successfully.")
 
+    # create a new admin    
     def RegisterAdmin(mycursor,mydb):
         firstName=input("Enter first name: ")
         lastName=input("Enter last name: ")
@@ -67,6 +72,7 @@ class AdminService (IAdminService):
         else:
             print("Admin registered successfully.")
 
+    # Update existing admin using the id
     def UpdateAdmin(mycursor,mydb):
         adminId=int(input("Enter admin id: "))
         firstName=input("Enter first name: ")
@@ -85,6 +91,7 @@ class AdminService (IAdminService):
         else:
             print("Admin updated successfully.")
 
+    # Delete admin by id
     def DeleteAdmin(mycursor,mydb):
         adminId = int(input("Enter adminId: "))
         try:

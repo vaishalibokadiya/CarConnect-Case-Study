@@ -1,4 +1,5 @@
 class Reservation:
+    # Constructor of reservation class
     def __init__(self, reservationId, customerId, vehicleId, startDate, endDate, totalCost, status):
         self.reservationId = reservationId
         self.customerId = customerId

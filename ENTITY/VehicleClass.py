@@ -1,4 +1,5 @@
 class Vehicle:
+    # Constructor of vehicle class
     def __init__(self, vehicleId, model, make, year, color, registrationNumber, availability, dailyRate):
         self.vehicle = vehicleId
         self.model = model

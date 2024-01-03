@@ -3,7 +3,8 @@ sys.path.insert(0,'D:/Vaishali Bokadiya/Python/CarConnect/EXCEPTION')
 from ReservationException import ReservationFailedException
 
 from abc import ABC, abstractmethod
-
+from datetime import datetime
+# Abstract class for reservation
 class IReservationService(ABC):
     @abstractmethod
     def GetReservationById(mycursor,mydb):
@@ -25,7 +26,16 @@ class IReservationService(ABC):
     def CancelReservation(mycursor,mydb):
         pass
 
+def convert_mysql_decimal_to_float(decimal_object):
+    if (decimal_object == None):
+        return None
+    else:
+        return float(decimal_object)
+
+
+# Implementation of IReservationService
 class ReservationService (IReservationService):
+    # Get reservation details using reservation id
     def GetReservationById(mycursor,mydb):
         reservationId = int(input("Enter reservation id: "))
         try:
@@ -38,6 +48,7 @@ class ReservationService (IReservationService):
                 print(row)
             print("Reservation details fetched successfully.")
 
+    # Get reservation details using customer Id
     def GetReservationsByCustomerId(mycursor,mydb):
         customerId = int(input("Enter customer ID:: "))
         try:
@@ -50,13 +61,20 @@ class ReservationService (IReservationService):
                 print(row)
             print("Reservation details fetched successfully.")
 
+    # Create new reservation
     def CreateReservation(mycursor,mydb):
         customerID=int(input("Enter customer id: "))
         vehicleID=int(input("Enter vehicle id: "))
         startDate=input("Enter start date: ")
         endDate=input("Enter end date: ")
-        totalCost=float(input("Enter total cost: "))
         status=input("Enter status: ")
+        start=datetime.strptime(startDate, "%Y/%m/%d")
+        end=datetime.strptime(endDate, "%Y/%m/%d")
+        mycursor.execute(f"SELECT dailyRate FROM Vehicle WHERE vehicleId={vehicleID}")
+        value=mycursor.fetchone()
+        dailyRate=convert_mysql_decimal_to_float(value[0])
+        noOfDays=(end-start).days
+        totalCost=int(noOfDays)*dailyRate
         try:
             mycursor.execute(f"INSERT INTO Reservation (customerId, vehicleId, startDate, endDate, totalCost, status) VALUES ({customerID},{vehicleID},'{startDate}','{endDate}',{totalCost},'{status}');")
             mydb.commit()
@@ -65,6 +83,7 @@ class ReservationService (IReservationService):
         else:
             print("Reservation created successfully.")
 
+    # Update an existing reservation
     def UpdateReservation(mycursor,mydb):
         reservationId=int(input("Enter reservation id: "))
         customerID=int(input("Enter customer id: "))
@@ -81,7 +100,7 @@ class ReservationService (IReservationService):
         else:
             print("Reservation updated successfully.")
 
-
+    # Delete a reservation
     def CancelReservation(mycursor,mydb):
         reservationId = int(input("Enter ID of the reservation you want to cancel: "))
         try:
